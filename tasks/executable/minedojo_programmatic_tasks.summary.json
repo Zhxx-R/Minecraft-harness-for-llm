@@ -1,0 +1,13 @@
+{
+  "categories": {
+    "combat": 471,
+    "harvest": 895,
+    "survival": 2,
+    "techtree": 213
+  },
+  "schema_version": "mc-agent-harness.minedojo-executable-manifest.v1",
+  "supported_count": 1581,
+  "task_count": 1581,
+  "unsupported_count": 0,
+  "unsupported_reasons": {}
+}

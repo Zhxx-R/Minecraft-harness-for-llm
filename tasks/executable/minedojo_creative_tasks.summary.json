@@ -1,0 +1,12 @@
+{
+  "calibration_statuses": {
+    "pending": 1560
+  },
+  "collections": {
+    "gpt3": 302,
+    "manual": 216,
+    "youtube": 1042
+  },
+  "schema_version": "mc-agent-harness.minedojo-creative-manifest.v1",
+  "task_count": 1560
+}

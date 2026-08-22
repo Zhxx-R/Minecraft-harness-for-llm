@@ -1,0 +1,56 @@
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.venv/
+
+# Node
+node_modules/
+dist/
+coverage/
+.vite/
+
+# Env and local data
+.env
+*.local
+knowledge/indexes/*
+!knowledge/indexes/.gitkeep
+knowledge/processed/*
+!knowledge/processed/.gitkeep
+!knowledge/processed/minecraft_1_20_1_knowledge.json
+logs/
+runs/
+.runtime/
+release/
+database/postgres/*.dump
+week10-recovery-*/
+services/mineclip-scorer/vendor/
+services/mineclip-scorer/checkpoints/
+services/mineclip-scorer/cache/
+infra/minecraft-server/**
+infra/minecraft-server/*.jar
+infra/minecraft-server/*.json
+infra/minecraft-server/*.url
+infra/minecraft-server/*.sha1
+infra/minecraft-server/*.actual
+infra/minecraft-server/server.properties
+infra/minecraft-server/eula.txt
+infra/minecraft-server/server.pid
+infra/minecraft-server/libraries/
+infra/minecraft-server/versions/
+infra/minecraft-server/world*/
+infra/minecraft-server/logs/
+infra/minecraft-server/crash-reports/
+infra/minecraft-server/banned-*.json
+infra/minecraft-server/ops.json
+infra/minecraft-server/usercache.json
+infra/minecraft-server/whitelist.json
+infra/minecraft-server/*.log
+infra/minecraft-server-pool/
+
+# OS/editor
+.DS_Store
+.idea/
+.vscode/

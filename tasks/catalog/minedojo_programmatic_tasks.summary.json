@@ -1,0 +1,20 @@
+{
+  "categories": {
+    "combat": 471,
+    "harvest": 895,
+    "survival": 2,
+    "techtree": 213
+  },
+  "schema_version": "mc-agent-harness.minedojo-programmatic-catalog.v1",
+  "source": {
+    "programmatic_tasks_url": "https://raw.githubusercontent.com/MineDojo/MineDojo/main/minedojo/tasks/description_files/programmatic_tasks.yaml",
+    "tasks_specs_url": "https://raw.githubusercontent.com/MineDojo/MineDojo/main/minedojo/tasks/description_files/tasks_specs.yaml",
+    "tasks_suite_url": "https://raw.githubusercontent.com/MineDojo/MineDojo/main/minedojo/tasks/description_files/tasks_suite.yaml"
+  },
+  "suite_tiers": {
+    "difficult": 16,
+    "not_in_official_suite": 1549,
+    "standard": 16
+  },
+  "task_count": 1581
+}

@@ -1,0 +1,37 @@
+{
+  "task_id": "minedojo_harvest_cobblestone",
+  "source": "minedojo",
+  "category": "harvest",
+  "family": "Harvest",
+  "goal": "Harvest one cobblestone by mining stone.",
+  "description": "Curated MineDojo-style harvest task for a basic stone resource.",
+  "allowed_actions": ["query_inventory", "request_visual_snapshot", "scan_blocks", "scan_dropped_items", "move_to", "dig_block_at", "wait_ticks", "craft_item", "place_block", "use_item", "fight_entity"],
+  "verifier": {"type": "inventory_contains", "item": "cobblestone", "count": 1},
+  "success_criteria": {"type": "inventory_contains", "item": "cobblestone", "count": 1},
+  "knowledge_tags": ["minecraft:block/stone", "minecraft:item/cobblestone", "minecraft:harvest"],
+  "runtime_profile": "benchmark-minimal",
+  "minedojo": {
+    "task_family": "harvest",
+    "programmatic": true,
+    "creative": false
+  },
+  "benchmark": {
+    "seed": 6102,
+    "difficulty": "normal",
+    "max_steps": 7,
+    "initial_state": {
+      "inventory": [{"name": "wooden_pickaxe", "count": 1}],
+      "nearby_blocks": [{"name": "stone", "position": {"x": 1, "y": 64, "z": 0}}],
+      "nearby_entities": []
+    },
+    "scripted_actions": [
+      {"type": "scan_blocks", "args": {"block": "stone", "count": 4}},
+      {"type": "move_to", "args": {"position": {"x": 1, "y": 64, "z": 0}, "tolerance": 1.5}},
+      {"type": "dig_block_at", "args": {"position": {"x": 1, "y": 64, "z": 0}, "block": "stone"}},
+      {"type": "scan_dropped_items", "args": {"item": "cobblestone", "max_distance": 6}},
+      {"type": "move_to", "args": {"position": {"x": 1, "y": 64, "z": 0}, "tolerance": 1.0}},
+      {"type": "wait_ticks", "args": {"ticks": 10}},
+      {"type": "query_inventory", "args": {}}
+    ]
+  }
+}

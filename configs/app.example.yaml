@@ -1,0 +1,24 @@
+app:
+  name: minecraft-agent-harness
+  environment: development
+
+harness:
+  max_steps_per_run: 200
+  default_failure_threshold: 3
+  checkpoint_interval_steps: 5
+  visual_snapshot_policy: on_demand
+
+runtime:
+  provider: mineflayer
+  worker_url: ws://localhost:8765
+  profile: benchmark-minimal
+  profile_dir: configs/runtime_profiles
+
+task_provider:
+  provider: minedojo
+  manifest_dir: tasks/manifests
+
+knowledge:
+  raw_dir: knowledge/raw
+  processed_dir: knowledge/processed
+  index_dir: knowledge/indexes

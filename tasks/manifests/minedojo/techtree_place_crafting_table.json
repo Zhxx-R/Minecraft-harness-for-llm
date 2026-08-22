@@ -1,0 +1,31 @@
+{
+  "task_id": "minedojo_techtree_place_crafting_table",
+  "source": "minedojo",
+  "category": "techtree",
+  "family": "TechTree",
+  "goal": "Place one crafting table in the world.",
+  "description": "Curated MineDojo-style task for validating block placement.",
+  "allowed_actions": ["query_inventory", "request_visual_snapshot", "scan_blocks", "scan_dropped_items", "move_to", "dig_block_at", "wait_ticks", "craft_item", "place_block", "use_item", "fight_entity"],
+  "verifier": {"type": "block_placed", "block": "crafting_table"},
+  "success_criteria": {"type": "block_placed", "block": "crafting_table"},
+  "knowledge_tags": ["minecraft:item/crafting_table", "mineflayer:placeBlock"],
+  "runtime_profile": "benchmark-minimal",
+  "minedojo": {
+    "task_family": "techtree",
+    "programmatic": true,
+    "creative": false
+  },
+  "benchmark": {
+    "seed": 6204,
+    "difficulty": "normal",
+    "max_steps": 1,
+    "initial_state": {
+      "inventory": [{"name": "crafting_table", "count": 1}],
+      "nearby_blocks": [{"name": "grass_block", "position": {"x": 0, "y": 64, "z": 0}}],
+      "nearby_entities": []
+    },
+    "scripted_actions": [
+      {"type": "place_block", "args": {"item": "crafting_table", "position": {"x": 0, "y": 65, "z": 0}}}
+    ]
+  }
+}

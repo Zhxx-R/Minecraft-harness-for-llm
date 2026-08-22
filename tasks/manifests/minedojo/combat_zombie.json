@@ -1,0 +1,31 @@
+{
+  "task_id": "minedojo_combat_zombie",
+  "source": "minedojo",
+  "category": "combat",
+  "family": "Combat",
+  "goal": "Defeat one nearby zombie.",
+  "description": "Curated MineDojo-style combat task for basic hostile entity interaction.",
+  "allowed_actions": ["query_inventory", "request_visual_snapshot", "scan_blocks", "scan_dropped_items", "move_to", "dig_block_at", "wait_ticks", "craft_item", "place_block", "use_item", "fight_entity"],
+  "verifier": {"type": "entity_defeated", "entity": "zombie"},
+  "success_criteria": {"type": "entity_defeated", "entity": "zombie"},
+  "knowledge_tags": ["minecraft:entity/zombie", "minecraft:combat", "mineflayer:attack"],
+  "runtime_profile": "benchmark-minimal",
+  "minedojo": {
+    "task_family": "combat",
+    "programmatic": true,
+    "creative": false
+  },
+  "benchmark": {
+    "seed": 6301,
+    "difficulty": "normal",
+    "max_steps": 1,
+    "initial_state": {
+      "inventory": [{"name": "wooden_sword", "count": 1}],
+      "nearby_blocks": [],
+      "nearby_entities": [{"id": 1, "name": "zombie", "type": "hostile", "position": {"x": 2, "y": 65, "z": 0}}]
+    },
+    "scripted_actions": [
+      {"type": "fight_entity", "args": {"entity": "zombie", "weapon": "wooden_sword", "max_attacks": 5}}
+    ]
+  }
+}

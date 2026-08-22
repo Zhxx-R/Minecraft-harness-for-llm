@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://minecraft-agent-harness.local/schemas/skill.schema.json",
+  "title": "SkillSpec",
+  "type": "object",
+  "required": ["name", "version", "description", "triggers", "preconditions", "action_plan", "status"],
+  "properties": {
+    "name": { "type": "string" },
+    "version": { "type": "string" },
+    "description": { "type": "string" },
+    "triggers": { "type": "array", "items": { "type": "string" } },
+    "preconditions": { "type": "array", "items": { "type": "string" } },
+    "action_plan": { "type": "array", "items": { "$ref": "action.schema.json" } },
+    "validation": { "type": "object" },
+    "source_run_id": { "type": ["string", "null"] },
+    "source_step_range": {
+      "type": ["object", "null"],
+      "required": ["start", "end"],
+      "properties": {
+        "start": { "type": "integer", "minimum": 0 },
+        "end": { "type": "integer", "minimum": 0 }
+      },
+      "additionalProperties": false
+    },
+    "task_scope": { "type": "array", "items": { "type": "string" } },
+    "dependencies": { "type": "array", "items": { "type": "string" } },
+    "metrics": { "type": "object" },
+    "status": {
+      "type": "string",
+      "enum": ["draft", "validated", "staged", "promoted", "deprecated"]
+    }
+  }
+}

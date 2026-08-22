@@ -1,0 +1,79 @@
+# RuntimeProfile declares a local-only Fabric setup for observation and training convenience.
+profile:
+  id: dev-fabric-observation
+  name: Development Fabric Observation
+  purpose: local_observation_and_training
+  default_for_benchmark: false
+  reference: https://github.com/MineDojo/Voyager/blob/main/installation/fabric_mods_install.md
+
+# MinecraftConnection follows the Voyager-tested Fabric family but should be verified locally.
+minecraft:
+  version: "1.19"
+  loader: fabric
+  loader_version: "0.14.18"
+  game_mode: survival
+  difficulty: peaceful
+  cheats_enabled: true
+  lan_port: null
+
+# WorldPolicy keeps local training convenient while still recording reproducibility metadata.
+world:
+  seed: null
+  reset_policy: manual_or_per_task
+  weather_policy: unchanged
+  time_policy: unchanged
+
+# ModPolicy documents the optional mods. The harness does not call these mods directly.
+mods:
+  enabled: true
+  config_checksum: null
+  list:
+    - id: fabric-api
+      name: Fabric API
+      role: base_fabric_api
+      required: true
+    - id: mod-menu
+      name: Mod Menu
+      role: local_mod_visibility
+      required: false
+    - id: complete-config
+      name: Complete Config
+      role: dependency_for_multi_server_pause
+      required: true
+    - id: multi-server-pause
+      name: Multi Server Pause
+      role: pause_world_while_waiting_for_model
+      required: false
+    - id: better-respawn
+      name: Better Respawn
+      role: keep_agent_respawn_near_observer_for_debugging
+      required: false
+
+# RespawnPolicy is intentionally limited to local training/debug runs.
+respawn:
+  policy: near_observer_debug
+  near_observer: true
+  max_distance_blocks: 32
+  allowed_for_benchmark: false
+
+# AgentBoundary confirms that mods cannot expand the LLM-visible action space.
+agent_boundary:
+  action_surface: harness_only
+  exposes_mod_apis: false
+  exposes_raw_mineflayer: false
+
+# AuditPolicy lists metadata that must be copied into run records.
+audit:
+  required_metadata:
+    - profile.id
+    - profile.reference
+    - minecraft.version
+    - minecraft.loader
+    - minecraft.loader_version
+    - minecraft.game_mode
+    - minecraft.difficulty
+    - minecraft.cheats_enabled
+    - mods.enabled
+    - mods.config_checksum
+    - world.seed
+    - respawn.policy

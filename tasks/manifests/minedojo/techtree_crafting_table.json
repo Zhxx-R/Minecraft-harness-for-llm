@@ -1,0 +1,31 @@
+{
+  "task_id": "minedojo_techtree_crafting_table",
+  "source": "minedojo",
+  "category": "techtree",
+  "family": "TechTree",
+  "goal": "Craft one crafting table.",
+  "description": "Curated MineDojo-style tech-tree task for creating the first crafting station.",
+  "allowed_actions": ["query_inventory", "request_visual_snapshot", "scan_blocks", "scan_dropped_items", "move_to", "dig_block_at", "wait_ticks", "craft_item", "place_block", "use_item", "fight_entity"],
+  "verifier": {"type": "inventory_contains", "item": "crafting_table", "count": 1},
+  "success_criteria": {"type": "inventory_contains", "item": "crafting_table", "count": 1},
+  "knowledge_tags": ["minecraft:item/crafting_table", "minecraft:recipe/crafting_table"],
+  "runtime_profile": "benchmark-minimal",
+  "minedojo": {
+    "task_family": "techtree",
+    "programmatic": true,
+    "creative": false
+  },
+  "benchmark": {
+    "seed": 6202,
+    "difficulty": "normal",
+    "max_steps": 1,
+    "initial_state": {
+      "inventory": [{"name": "oak_planks", "count": 4}],
+      "nearby_blocks": [],
+      "nearby_entities": []
+    },
+    "scripted_actions": [
+      {"type": "craft_item", "args": {"item": "crafting_table", "count": 1}}
+    ]
+  }
+}

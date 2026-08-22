@@ -1,0 +1,17 @@
+id: qwen3.7-plus
+provider: qwen
+default: true
+capabilities:
+  text: true
+  vision: true
+  tool_json: true
+  streaming: true
+limits:
+  max_input_tokens: null
+  max_output_tokens: 4096
+cost:
+  input_per_1m_tokens: null
+  output_per_1m_tokens: null
+runtime:
+  base_url_env: QWEN_BASE_URL
+  api_key_env: QWEN_API_KEY

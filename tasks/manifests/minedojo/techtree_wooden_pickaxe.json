@@ -1,0 +1,31 @@
+{
+  "task_id": "minedojo_techtree_wooden_pickaxe",
+  "source": "minedojo",
+  "category": "techtree",
+  "family": "TechTree",
+  "goal": "Craft one wooden pickaxe using a crafting table.",
+  "description": "Curated MineDojo-style tech-tree task for the first tool.",
+  "allowed_actions": ["query_inventory", "request_visual_snapshot", "scan_blocks", "scan_dropped_items", "move_to", "dig_block_at", "wait_ticks", "craft_item", "place_block", "use_item", "fight_entity"],
+  "verifier": {"type": "inventory_contains", "item": "wooden_pickaxe", "count": 1},
+  "success_criteria": {"type": "inventory_contains", "item": "wooden_pickaxe", "count": 1},
+  "knowledge_tags": ["minecraft:item/wooden_pickaxe", "minecraft:recipe/wooden_pickaxe"],
+  "runtime_profile": "benchmark-minimal",
+  "minedojo": {
+    "task_family": "techtree",
+    "programmatic": true,
+    "creative": false
+  },
+  "benchmark": {
+    "seed": 6205,
+    "difficulty": "normal",
+    "max_steps": 1,
+    "initial_state": {
+      "inventory": [{"name": "oak_planks", "count": 3}, {"name": "stick", "count": 2}],
+      "nearby_blocks": [{"name": "crafting_table", "position": {"x": 1, "y": 65, "z": 0}}],
+      "nearby_entities": []
+    },
+    "scripted_actions": [
+      {"type": "craft_item", "args": {"item": "wooden_pickaxe", "count": 1, "station": "crafting_table"}}
+    ]
+  }
+}

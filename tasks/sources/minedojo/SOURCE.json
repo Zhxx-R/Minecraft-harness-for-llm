@@ -1,0 +1,25 @@
+{
+  "license_reference": "https://github.com/MineDojo/MineDojo/blob/2731bc27394269643b43828d9db8ab3a364601f0/LICENSE",
+  "repository": "https://github.com/MineDojo/MineDojo",
+  "revision": "2731bc27394269643b43828d9db8ab3a364601f0",
+  "schema_version": "mc-agent-harness.minedojo-source-snapshot.v1",
+  "sources": [
+    {
+      "path": "creative_tasks.yaml",
+      "sha256": "609ce47189e1b94407820c5b0f79b9ea241682bbfd897ecdb63e756efdbcac66",
+      "source_url": "https://raw.githubusercontent.com/MineDojo/MineDojo/2731bc27394269643b43828d9db8ab3a364601f0/minedojo/tasks/description_files/creative_tasks.yaml"
+    },
+    {
+      "path": "programmatic_tasks.yaml",
+      "sha256": "d3116c09a1279b425414ef917d3a125e6d1dde43528804171d6be8be810f66e7"
+    },
+    {
+      "path": "tasks_specs.yaml",
+      "sha256": "ec0e11e076c594325b1567ed62e78debc13782bfdf1b1071ebcab2b1280d427c"
+    },
+    {
+      "path": "tasks_suite.yaml",
+      "sha256": "f7676441d0036d1f242fc6f1d899ed81d73a5e6974c4c20c373514191d3b3b33"
+    }
+  ]
+}

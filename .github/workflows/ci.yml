@@ -1,0 +1,75 @@
+name: CI
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+
+jobs:
+  backend:
+    name: Backend Python
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install backend
+        working-directory: backend
+        run: python -m pip install -c constraints-handoff.txt -e ".[dev]"
+
+      - name: Compile Python
+        run: python -m compileall -q backend/src scripts services/mineclip-scorer/app.py
+
+      - name: Validate shell scripts
+        run: find scripts -type f -name '*.sh' -print0 | xargs -0 -n1 bash -n
+
+      - name: Validate JSON schemas
+        run: python scripts/validate_json_schemas.py
+
+      - name: Run backend tests
+        working-directory: backend
+        run: pytest
+
+  worker:
+    name: Mineflayer Worker TypeScript
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: "npm"
+          cache-dependency-path: workers/mineflayer-worker/package-lock.json
+
+      - name: Install worker dependencies
+        working-directory: workers/mineflayer-worker
+        run: npm ci
+
+      - name: Typecheck worker
+        working-directory: workers/mineflayer-worker
+        run: npm run typecheck
+
+  frontend:
+    name: Frontend TypeScript
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: "npm"
+          cache-dependency-path: frontend/package-lock.json
+
+      - name: Install frontend dependencies
+        working-directory: frontend
+        run: npm ci
+
+      - name: Typecheck frontend
+        working-directory: frontend
+        run: npm run typecheck

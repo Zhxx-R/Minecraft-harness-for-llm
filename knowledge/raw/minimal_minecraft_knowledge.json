@@ -1,0 +1,126 @@
+{
+  "version": "0.1.0",
+  "description": "Minimal Minecraft domain knowledge for the Week 1 harness baseline.",
+  "terms": [
+    {
+      "canonical_id": "oak_log",
+      "kind": "block",
+      "name": "Oak Log",
+      "aliases": ["log", "logs", "wood log", "tree log", "oak log", "wood"],
+      "description": "A common tree block harvested from oak trees. It can be converted into planks.",
+      "tags": ["harvest", "wood", "tree", "basic_resource"]
+    },
+    {
+      "canonical_id": "oak_planks",
+      "kind": "item",
+      "name": "Oak Planks",
+      "aliases": ["plank", "planks", "wooden plank", "wooden planks", "oak planks"],
+      "description": "Basic processed wood used for crafting sticks, crafting tables, and wooden tools.",
+      "tags": ["crafting", "wood", "basic_resource"]
+    },
+    {
+      "canonical_id": "stick",
+      "kind": "item",
+      "name": "Stick",
+      "aliases": ["stick", "sticks"],
+      "description": "Basic crafting component used in tools and torches.",
+      "tags": ["crafting", "component", "basic_resource"]
+    },
+    {
+      "canonical_id": "crafting_table",
+      "kind": "block",
+      "name": "Crafting Table",
+      "aliases": ["crafting table", "workbench", "craft table"],
+      "description": "A crafting station required for 3x3 recipes such as pickaxes.",
+      "tags": ["crafting", "station", "basic_block"]
+    },
+    {
+      "canonical_id": "wooden_pickaxe",
+      "kind": "item",
+      "name": "Wooden Pickaxe",
+      "aliases": ["wooden pickaxe", "wood pickaxe", "wood pick", "pickaxe"],
+      "description": "A basic pickaxe crafted from planks and sticks. It can mine stone-level starter blocks.",
+      "tags": ["tool", "mining", "wood"]
+    },
+    {
+      "canonical_id": "cobblestone",
+      "kind": "block",
+      "name": "Cobblestone",
+      "aliases": ["cobblestone", "stone drop", "cobble"],
+      "description": "Stone resource obtained by mining stone with a pickaxe.",
+      "tags": ["mining", "stone", "resource"]
+    },
+    {
+      "canonical_id": "furnace",
+      "kind": "block",
+      "name": "Furnace",
+      "aliases": ["furnace", "smelter"],
+      "description": "A block used to smelt ores and cook food.",
+      "tags": ["crafting", "smelting", "station"]
+    },
+    {
+      "canonical_id": "zombie",
+      "kind": "entity",
+      "name": "Zombie",
+      "aliases": ["zombie", "zombies"],
+      "description": "A hostile melee mob. Avoid early unless the task requires combat.",
+      "tags": ["combat", "hostile_mob"]
+    }
+  ],
+  "recipes": [
+    {
+      "output": "oak_planks",
+      "output_count": 4,
+      "station": "inventory",
+      "ingredients": [{"item_id": "oak_log", "count": 1}],
+      "description": "Craft 4 oak planks from 1 oak log in the inventory crafting grid."
+    },
+    {
+      "output": "stick",
+      "output_count": 4,
+      "station": "inventory",
+      "ingredients": [{"item_id": "oak_planks", "count": 2}],
+      "description": "Craft sticks from 2 planks."
+    },
+    {
+      "output": "crafting_table",
+      "output_count": 1,
+      "station": "inventory",
+      "ingredients": [{"item_id": "oak_planks", "count": 4}],
+      "description": "Craft a crafting table from 4 planks."
+    },
+    {
+      "output": "wooden_pickaxe",
+      "output_count": 1,
+      "station": "crafting_table",
+      "ingredients": [
+        {"item_id": "oak_planks", "count": 3},
+        {"item_id": "stick", "count": 2}
+      ],
+      "requires": ["crafting_table"],
+      "description": "Craft a wooden pickaxe with 3 planks and 2 sticks at a crafting table."
+    },
+    {
+      "output": "furnace",
+      "output_count": 1,
+      "station": "crafting_table",
+      "ingredients": [{"item_id": "cobblestone", "count": 8}],
+      "requires": ["crafting_table"],
+      "description": "Craft a furnace with 8 cobblestone at a crafting table."
+    }
+  ],
+  "documents": [
+    {
+      "id": "mineflayer-operation-guide",
+      "title": "Mineflayer Operation Guide",
+      "tags": ["mineflayer", "runtime", "actions"],
+      "content": "The LLM must not call Mineflayer APIs directly. The harness exposes validated atomic actions. Use scan_blocks to locate relevant blocks, scan_dropped_items to locate dropped item entities, move_to to approach coordinates, dig_block_at to dig a specific block coordinate, wait_ticks to let vanilla pickup or short-lived world state update, query_inventory to inspect inventory, craft_item to craft a canonical item ID, place_block to place an inventory block, use_item to activate items or targets, fight_entity for bounded combat, and request_visual_snapshot only when structured observations are insufficient."
+    },
+    {
+      "id": "early-game-wood-chain",
+      "title": "Early Game Wood Chain",
+      "tags": ["minecraft", "crafting", "wood", "tools"],
+      "content": "A typical early-game chain is: harvest oak_log from a tree, craft oak_planks, craft stick, craft crafting_table, place the crafting_table, then craft wooden_pickaxe. Wooden pickaxe enables starter mining tasks."
+    }
+  ]
+}

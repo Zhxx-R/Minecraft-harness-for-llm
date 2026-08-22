@@ -1,0 +1,53 @@
+# RuntimeProfile declares the Minecraft environment assumptions recorded for every run.
+profile:
+  id: benchmark-minimal
+  name: Benchmark Minimal
+  purpose: reproducible_evaluation
+  default_for_benchmark: true
+
+# MinecraftConnection captures the expected world/runtime state before a worker connects.
+minecraft:
+  version: "1.19"
+  loader: vanilla
+  loader_version: null
+  game_mode: survival
+  difficulty: normal
+  cheats_enabled: false
+  lan_port: null
+
+# WorldPolicy defines reproducibility knobs used by benchmark runners.
+world:
+  seed: null
+  reset_policy: per_task
+  weather_policy: unchanged
+  time_policy: unchanged
+
+# ModPolicy makes the default benchmark independent of convenience mods.
+mods:
+  enabled: false
+  list: []
+  config_checksum: null
+
+# RespawnPolicy preserves vanilla behavior for benchmark claims.
+respawn:
+  policy: vanilla
+  near_observer: false
+  max_distance_blocks: null
+
+# AgentBoundary confirms that the LLM only sees harness actions under this profile.
+agent_boundary:
+  action_surface: harness_only
+  exposes_mod_apis: false
+  exposes_raw_mineflayer: false
+
+# AuditPolicy lists metadata that must be copied into run records.
+audit:
+  required_metadata:
+    - profile.id
+    - minecraft.version
+    - minecraft.loader
+    - minecraft.game_mode
+    - minecraft.difficulty
+    - minecraft.cheats_enabled
+    - mods.enabled
+    - world.seed

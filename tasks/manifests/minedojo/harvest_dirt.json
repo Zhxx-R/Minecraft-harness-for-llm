@@ -1,0 +1,37 @@
+{
+  "task_id": "minedojo_harvest_dirt",
+  "source": "minedojo",
+  "category": "harvest",
+  "family": "Harvest",
+  "goal": "Harvest one dirt block.",
+  "description": "Curated MineDojo-style harvest task for a simple terrain block.",
+  "allowed_actions": ["query_inventory", "request_visual_snapshot", "scan_blocks", "scan_dropped_items", "move_to", "dig_block_at", "wait_ticks", "craft_item", "place_block", "use_item", "fight_entity"],
+  "verifier": {"type": "inventory_contains", "item": "dirt", "count": 1},
+  "success_criteria": {"type": "inventory_contains", "item": "dirt", "count": 1},
+  "knowledge_tags": ["minecraft:block/dirt", "minecraft:harvest"],
+  "runtime_profile": "benchmark-minimal",
+  "minedojo": {
+    "task_family": "harvest",
+    "programmatic": true,
+    "creative": false
+  },
+  "benchmark": {
+    "seed": 6103,
+    "difficulty": "normal",
+    "max_steps": 7,
+    "initial_state": {
+      "inventory": [],
+      "nearby_blocks": [{"name": "dirt", "position": {"x": 1, "y": 64, "z": 0}}],
+      "nearby_entities": []
+    },
+    "scripted_actions": [
+      {"type": "scan_blocks", "args": {"block": "dirt", "count": 4}},
+      {"type": "move_to", "args": {"position": {"x": 1, "y": 64, "z": 0}, "tolerance": 1.5}},
+      {"type": "dig_block_at", "args": {"position": {"x": 1, "y": 64, "z": 0}, "block": "dirt"}},
+      {"type": "scan_dropped_items", "args": {"item": "dirt", "max_distance": 6}},
+      {"type": "move_to", "args": {"position": {"x": 1, "y": 64, "z": 0}, "tolerance": 1.0}},
+      {"type": "wait_ticks", "args": {"ticks": 10}},
+      {"type": "query_inventory", "args": {}}
+    ]
+  }
+}

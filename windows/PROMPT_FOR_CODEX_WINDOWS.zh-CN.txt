@@ -1,0 +1,19 @@
+请接管并配置这个 Minecraft Agent Harness Windows 迁移包。
+
+约束：
+1. 先阅读 windows/README_FIRST.zh-CN.md、CODEX_HANDOFF.md 和 PACKAGE_BUILD_INFO.json。
+2. 不要读取、输出或提交 .env 中的真实凭据；不要让我把 API Key 粘贴到聊天中。
+3. 先运行 windows/check-prerequisites.ps1。缺少 Python 3.11、Node.js 22、Java 17 或 Docker Desktop 时，先报告缺项和官方安装方式。
+4. 确认这是新建的本地 Docker 数据库后，运行：
+   powershell -ExecutionPolicy Bypass -File .\windows\setup.ps1 -RestoreDatabase -AllowDatabaseReset
+5. 运行：
+   powershell -ExecutionPolicy Bypass -File .\windows\start-all.ps1
+6. 用 windows/verify.ps1 验证 PostgreSQL 数据、后端、前端和 worker；不要仅凭进程启动就宣布成功。
+7. 启动地址应为：
+   前端 http://127.0.0.1:5173
+   后端 http://127.0.0.1:8000/api/health
+8. 需要调用模型时，让我在本机自行编辑 .env 的 QWEN_API_KEY，不要在对话里索取。
+9. 只有我明确确认已阅读并接受 https://aka.ms/MinecraftEULA 后，才运行 windows/start-minecraft.ps1 -AcceptEula。
+10. MineCLIP 是可选重型组件；需要时运行 windows/setup-mineclip.ps1，再以 start-all.ps1 -WithMineclip 启动。
+
+注意：压缩包包含当前工作树（包括未提交改动）、历史 runs、SQLite 审计库、Minecraft 世界、MineCLIP 权重和 PostgreSQL 逻辑备份；不包含 macOS 的 .venv/node_modules、真实 .env、密码和可转移的 EULA 接受状态。

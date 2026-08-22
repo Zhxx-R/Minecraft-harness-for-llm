@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://minecraft-agent-harness.local/schemas/action.schema.json",
+  "title": "HarnessAction",
+  "type": "object",
+  "required": ["type", "args"],
+  "properties": {
+    "type": {
+      "type": "string",
+      "enum": [
+        "resolve_terms",
+        "get_recipe",
+        "retrieve_docs",
+        "scan_blocks",
+        "scan_entities",
+        "scan_dropped_items",
+        "move_to",
+        "follow",
+        "dig_block_at",
+        "wait_ticks",
+        "process_item",
+        "craft_item",
+        "smelt_item",
+        "place_block",
+        "equip_item",
+        "fight_entity",
+        "use_item",
+        "consume_item",
+        "move_to_and_engage_combat",
+        "engage_combat",
+        "query_inventory",
+        "execute_skill",
+        "request_visual_snapshot",
+        "submit_for_evaluation"
+      ]
+    },
+    "args": {
+      "type": "object"
+    }
+  },
+  "additionalProperties": false
+}

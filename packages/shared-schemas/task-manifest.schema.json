@@ -1,0 +1,121 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://minecraft-agent-harness.local/schemas/task-manifest.schema.json",
+  "title": "TaskManifest",
+  "type": "object",
+  "required": [
+    "task_id",
+    "source",
+    "category",
+    "goal",
+    "allowed_actions",
+    "verifier",
+    "success_criteria",
+    "knowledge_tags"
+  ],
+  "properties": {
+    "task_id": { "type": "string" },
+    "source": { "type": "string" },
+    "category": { "type": "string" },
+    "family": { "type": "string" },
+    "goal": { "type": "string" },
+    "description": { "type": "string" },
+    "allowed_actions": {
+      "type": "array",
+      "items": {
+        "$ref": "action.schema.json#/properties/type"
+      },
+      "minItems": 1
+    },
+    "verifier": { "$ref": "#/$defs/verifier" },
+    "success_criteria": { "$ref": "#/$defs/verifier" },
+    "knowledge_tags": { "type": "array", "items": { "type": "string" } },
+    "minedojo": { "type": "object" },
+    "runtime_profile": { "type": "string" },
+    "benchmark": {
+      "type": "object",
+      "properties": {
+        "seed": { "type": ["integer", "null"] },
+        "difficulty": { "type": "string" },
+        "max_steps": { "type": "integer", "minimum": 1 },
+        "scripted_actions": {
+          "type": "array",
+          "items": { "$ref": "action.schema.json" }
+        },
+        "initial_state": { "type": "object" }
+      },
+      "additionalProperties": true
+    }
+  },
+  "additionalProperties": true,
+  "$defs": {
+    "verifier": {
+      "oneOf": [
+        {
+          "type": "object",
+          "required": ["type"],
+          "properties": {
+            "type": {
+              "type": "string",
+              "enum": [
+                "inventory_contains",
+                "block_placed",
+                "entity_defeated",
+                "entity_kill_delta",
+                "item_used_delta",
+                "time_alive",
+                "creative_mineclip"
+              ]
+            },
+            "item": { "type": "string" },
+            "item_id": { "type": "string" },
+            "block": { "type": "string" },
+            "block_id": { "type": "string" },
+            "entity": { "type": "string" },
+            "entity_id": { "type": "string" },
+            "name": { "type": "string" },
+            "count": { "type": "integer", "minimum": 1 },
+            "position": { "type": "object" },
+            "target_days": { "type": "integer", "minimum": 1 },
+            "ticks": { "type": "integer", "minimum": 1 },
+            "prompt": { "type": "string", "minLength": 1 },
+            "negative_prompts": {
+              "type": "array",
+              "items": { "type": "string", "minLength": 1 },
+              "minItems": 1
+            },
+            "frame_sampling": { "type": "object" },
+            "aggregation": { "type": "string" },
+            "score_threshold": { "type": ["number", "null"] },
+            "calibration": { "type": "object" }
+          },
+          "additionalProperties": true
+        },
+        {
+          "type": "object",
+          "required": ["all"],
+          "properties": {
+            "all": {
+              "type": "array",
+              "items": { "$ref": "#/$defs/verifier" },
+              "minItems": 1
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "required": ["any"],
+          "properties": {
+            "any": {
+              "type": "array",
+              "items": { "$ref": "#/$defs/verifier" },
+              "minItems": 1
+            }
+          },
+          "additionalProperties": false
+        }
+      ]
+    }
+  }
+}
